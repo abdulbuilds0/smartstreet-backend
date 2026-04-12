@@ -1,4 +1,4 @@
-require('dotenv').config();
+﻿require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 
@@ -7,12 +7,14 @@ const vendorRoutes = require('./routes/vendor.routes');
 const reviewRoutes = require('./routes/review.routes');
 const adminRoutes = require('./routes/admin.routes');
 const categoryRoutes = require('./routes/category.routes');
+const userRoutes = require('./routes/user.routes');
+const vendorRequestRoutes = require('./routes/vendorrequest.routes');
 
 const app = express();
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5500', 'http://127.0.0.1:5500', 'https://smartstreet-frontend.vercel.app'],
-  credentials: true,
+  origin: '*',
+  credentials: false,
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -21,9 +23,9 @@ app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/vendors', vendorRoutes);
 app.use('/api/v1/reviews', reviewRoutes);
 app.use('/api/v1/admin', adminRoutes);
-app.use('/api/v1/users', require('./routes/user.routes'));
-app.use('/api/v1/vendor-requests', require('./routes/vendorrequest.routes'));
 app.use('/api/v1/categories', categoryRoutes);
+app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/vendor-requests', vendorRequestRoutes);
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
