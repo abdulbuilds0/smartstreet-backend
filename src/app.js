@@ -11,7 +11,7 @@ const categoryRoutes = require('./routes/category.routes');
 const app = express();
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5500', 'http://127.0.0.1:5500'],
+  origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5500', 'http://127.0.0.1:5500', 'https://smartstreet-frontend.vercel.app'],
   credentials: true,
 }));
 app.use(express.json());
@@ -22,6 +22,7 @@ app.use('/api/v1/vendors', vendorRoutes);
 app.use('/api/v1/reviews', reviewRoutes);
 app.use('/api/v1/admin', adminRoutes);
 app.use('/api/v1/users', require('./routes/user.routes'));
+app.use('/api/v1/vendor-requests', require('./routes/vendorrequest.routes'));
 app.use('/api/v1/categories', categoryRoutes);
 
 app.get('/health', (req, res) => {
